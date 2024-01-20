@@ -1,0 +1,160 @@
+<%- include('partials/header/header'); %>
+<%- include('partials/navigation/topbar-end'); %>
+<%- include('partials/navigation/navbar'); %>
+
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-5 p-0" style="background-image: url(public/img/carousel-bg-1.jpg);">
+  <div class="container-fluid page-header-inner py-5">
+    <div class="container text-center">
+      <h1 class="display-3 text-white mb-3 animated slideInDown">Profile</h1>
+    </div>
+  </div>
+</div>
+<!-- Page Header End -->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-4">
+      <div class="card shadow-lg mb-4 border-0">
+        <div class="card-header border-bottom-0 pt-7 ">
+          <h3 class="fw-bold text-center">PROFILE</h3>
+        </div>
+        <div class="card-body mx-auto">
+          <div class="d-flex justify-content-center">
+            <% if (!user.imgUrl) { %>
+            <img src="public/img/profile/empty-profile.png" class="img-fluid img-thumbnail rounded-circle" style="width: 100px; height: 100px;" alt="">
+            <% } else { %>
+            <img src="<%= user.imageURL %>" class="img-fluid img-thumbnail rounded-circle" style="width: 100px; height: 100px;" alt="">
+            <% } %>
+          </div>
+          <h5 class="fw-bold text-center">
+            <%= user.fullname %>
+          </h5><span class="text-700 text-center d-block mt-0">Member</span>
+        </div>
+        <div class="accordion-item m-3">
+          <h6 class="accordion-header" id="heading2"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="true" aria-controls="collapse2"><span class="mb-0 fw-bold text-start  text-1000">Profile</span></button>
+          </h6>
+
+          <div class="accordion-collapse collapse" id="collapse2" aria-labelledby="heading2" data-bs-parent="#accordionExample">
+            <div class="accordion-body bg-100">Lorem, ipsum dolor sit amet consectetur
+              adipisicing elit. Consequatur molestiae cumque cum officia modi tenetur impedit
+              odio, amet eligendi. Vitae.</div>
+          </div>
+        </div>
+        <p class="text-center mt-3">Lorem ipsum dolor sit amet <a href="/">home</a></p>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="card shadow-lg mb-4 border-0">
+        <div class="card-header border-bottom-0 pt-7 ">
+          <h3 class="fw-bold">EDIT PROFILE</h3>
+        </div>
+        <div class="card-body">
+          <ul class="pagination">
+            <li class="nav-item">
+              <a class="nav-link selected" aria-current="page" href="#" data-no="1">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-no="2">Change Password</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-no="3">Change Email</a>
+            </li>
+          </ul>
+          <% if (user) { %>
+          <div data-page-no="1" class="form-page">
+            <form action="profile" method="post" enctype="multipart/form-data">
+              <div class="row g-3">
+                <div class="form-floating col-12 col-sm-12">
+                  <input type="text" class="form-control border-0" name="fullname" placeholder="Full Name" style="height: 55px;" value="<%= user.fullname %>" >
+                  <label for="fullname">Full Name</label>
+                </div>
+                <div class="form-floating col-12 col-sm-12">
+                  <input type="email" class="form-control border-0" name="email" placeholder="Email" style="height: 55px;" value="<%= user.email %>" >
+                  <label for="email">Email</label>
+                </div>
+                <div class="form-floating col-12 col-sm-6">
+                  <input type="date" class="form-control border-0" name="birthdate" style="height: 55px;" id="birthdateInput">
+                  <label for="birthdate">Birthdate</label>
+                </div>
+                <div class="form-floating col-12 col-sm-6">
+                  <input type="number" class="form-control border-0" name="contact" placeholder="Contact" style="height: 55px;" value="<%= user.contact %>" >
+                  <label for="contact">Contact Number</label>
+                </div>
+                <div class="form-floating col-12 col-sm-12">
+                  <input type="text" class="form-control border-0" name="address" placeholder="Address" style="height: 55px;" value="<%= user.address %>" >
+                  <label for="address">Address</label>
+                </div>
+                <div class="profile-image col-6 col-sm-6">
+                  <label for="image" class="form-label">Profile Picture</label>
+                  <input class="form-control" type="file" name="image" id="image" placeholder="Image" value="<%= user.imageURL %>">
+                </div>
+                <div class="col-12">
+                  <button class="btn btn-secondary w-100 py-3" type="submit">Update</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <% } else { %>
+          <p>User data not available.</p>
+          <% } %>
+          <div data-page-no="2" class="form-page">
+            <form action="register" method="post">
+              <div class="row g-3">
+                <div class="form-floating col-12 col-sm-12">
+                  <input type="password" class="form-control border-0" name="password" style="height: 55px;">
+                  <label for="password">Old Password</label>
+                </div>
+                <div class="form-floating col-12 col-sm-12">
+                  <input type="password" class="form-control border-0" name="new_password" style="height: 55px;">
+                  <label for="new_password">New Password</label>
+                </div>
+                <div class="form-floating col-12 col-sm-12">
+                  <input type="password" class="form-control border-0" name="confirm_password" style="height: 55px;">
+                  <label for="confirm_password">Confirm Password</label>
+                </div>
+                <div class="col-12">
+                  <button class="btn btn-secondary w-100 py-3" type="submit">Update</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div data-page-no="3" class="form-page">
+            <form action="register" method="post">
+              <div class="row g-3">
+                <div class="form-floating col-12 col-sm-12">
+                  <input type="email" class="form-control border-0" name="email" style="height: 55px;">
+                  <label for="email">Current Email</label>
+                </div>
+                <div class="form-floating col-12 col-sm-12">
+                  <input type="email" class="form-control border-0" name="new_email" style="height: 55px;">
+                  <label for="new_email">New Email</label>
+                </div>
+                <div class="form-floating col-12 col-sm-12">
+                  <input type="password" class="form-control border-0" name="password" style="height: 55px;">
+                  <label for="password">Password</label>
+                </div>
+                <div class="col-12">
+                  <button class="btn btn-secondary w-100 py-3" type="submit">Update</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // Assuming user.birthdate is in the format "YYYY-MM-DD"
+  const userBirthdate = '<%= user.birthdate %>';
+
+  if (userBirthdate) {
+    // Manually construct the date string in "YYYY-MM-DD" format
+    const formattedDate = new Date(userBirthdate).toISOString().split('T')[0];
+
+    const dateInput = document.getElementById('birthdateInput');
+    dateInput.value = formattedDate;
+  }
+</script>
+<%- include('partials/footer/footer'); %>
